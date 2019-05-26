@@ -1,0 +1,64 @@
+{
+  "name": "openuv-adapter",
+  "display_name": "OpenUV",
+  "version": "0.1.0",
+  "description": "Get the current uv index from www.openuv.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/openuv-adapter.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/openuv-adapter/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/openuv-adapter#readme",
+  "files": [
+    "LICENSE",
+    "SHA256SUMS",
+    "index.js",
+    "openuv-adapter.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}",
+    "schema": {
+      "type": "object",
+      "required": [
+        "apiKey",
+        "latitude",
+        "longitude"
+      ],
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "title": "The api key"
+        },
+        "latitude": {
+          "type": "number",
+          "title": "The latitude of your position"
+        },
+        "longitude": {
+          "type": "number",
+          "title": "The longitude of your position"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "babel-eslint": "^10.0.1"
+  }
+}
