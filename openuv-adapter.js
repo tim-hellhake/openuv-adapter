@@ -23,6 +23,7 @@ class OpenUVDevice extends Device {
     this.apiKey = manifest.moziot.config.apiKey;
     this.latitude = manifest.moziot.config.latitude;
     this.longitude = manifest.moziot.config.longitude;
+
     this.uvProperty = new Property(this, 'uv', {
       type: 'number',
       title: 'UV',
@@ -30,6 +31,14 @@ class OpenUVDevice extends Device {
       readOnly: true
     });
     this.properties.set(this.uvProperty.name, this.uvProperty);
+
+    this.uvTimeProperty = new Property(this, 'uv_time', {
+      type: 'string',
+      title: 'UV time',
+      description: 'The time of the current UV index',
+      readOnly: true
+    });
+    this.properties.set(this.uvTimeProperty.name, this.uvTimeProperty);
 
     if (!this.apiKey) {
       console.warn('No apiKey set');
@@ -66,6 +75,8 @@ class OpenUVDevice extends Device {
 
       this.uvProperty.setCachedValue(json.result.uv);
       this.notifyPropertyChanged(this.uvProperty);
+      this.uvTimeProperty.setCachedValue(json.result.uv_time);
+      this.notifyPropertyChanged(this.uvTimeProperty);
     }
   }
 }
