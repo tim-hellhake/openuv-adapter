@@ -40,6 +40,14 @@ class OpenUVDevice extends Device {
     });
     this.properties.set(this.uvTimeProperty.name, this.uvTimeProperty);
 
+    this.ozoneProperty = new Property(this, 'ozone', {
+      type: 'number',
+      title: 'Ozone',
+      description: 'The ozone level',
+      readOnly: true
+    });
+    this.properties.set(this.ozoneProperty.name, this.ozoneProperty);
+
     if (!this.apiKey) {
       console.warn('No apiKey set');
     }
@@ -77,6 +85,8 @@ class OpenUVDevice extends Device {
       this.notifyPropertyChanged(this.uvProperty);
       this.uvTimeProperty.setCachedValue(json.result.uv_time);
       this.notifyPropertyChanged(this.uvTimeProperty);
+      this.ozoneProperty.setCachedValue(json.result.ozone);
+      this.notifyPropertyChanged(this.ozoneProperty);
     }
   }
 }
