@@ -24,29 +24,26 @@ class OpenUVDevice extends Device {
     this.latitude = manifest.moziot.config.latitude;
     this.longitude = manifest.moziot.config.longitude;
 
-    this.uvProperty = new Property(this, 'uv', {
+    this.addProperty('uv', {
       type: 'number',
       title: 'UV',
       description: 'The current UV index',
       readOnly: true
     });
-    this.properties.set(this.uvProperty.name, this.uvProperty);
 
-    this.uvTimeProperty = new Property(this, 'uv_time', {
+    this.addProperty('uv_time', {
       type: 'string',
       title: 'UV time',
       description: 'The time of the current UV index',
       readOnly: true
     });
-    this.properties.set(this.uvTimeProperty.name, this.uvTimeProperty);
 
-    this.ozoneProperty = new Property(this, 'ozone', {
+    this.addProperty('ozone', {
       type: 'number',
       title: 'Ozone',
       description: 'The ozone level',
       readOnly: true
     });
-    this.properties.set(this.ozoneProperty.name, this.ozoneProperty);
 
     if (!this.apiKey) {
       console.warn('No apiKey set');
@@ -59,6 +56,12 @@ class OpenUVDevice extends Device {
     if (!this.longitude) {
       console.warn('No longitude set');
     }
+  }
+
+  addProperty(id, description) {
+    const property = new Property(this, id, description);
+
+    this.properties.set(id, property);
   }
 
   startPolling(interval) {
@@ -81,13 +84,16 @@ class OpenUVDevice extends Device {
 
       const json = await result.json();
 
-      this.uvProperty.setCachedValue(json.result.uv);
-      this.notifyPropertyChanged(this.uvProperty);
-      this.uvTimeProperty.setCachedValue(json.result.uv_time);
-      this.notifyPropertyChanged(this.uvTimeProperty);
-      this.ozoneProperty.setCachedValue(json.result.ozone);
-      this.notifyPropertyChanged(this.ozoneProperty);
+      this.setValue('uv', json.result.uv);
+      this.setValue('uv_time', json.result.uv_time);
+      this.setValue('ozone', json.result.ozone);
     }
+  }
+
+  setValue(id, value) {
+    const property = this.properties.get(id);
+    property.setCachedValue(value);
+    this.notifyPropertyChanged(property);
   }
 }
 
