@@ -45,6 +45,13 @@ class OpenUVDevice extends Device {
       readOnly: true
     });
 
+    this.addProperty('ozone_time', {
+      type: 'string',
+      title: 'Ozone time',
+      description: 'The time of the ozone level',
+      readOnly: true
+    });
+
     if (!this.apiKey) {
       console.warn('No apiKey set');
     }
@@ -87,6 +94,7 @@ class OpenUVDevice extends Device {
       this.setValue('uv', json.result.uv);
       this.setValue('uv_time', json.result.uv_time);
       this.setValue('ozone', json.result.ozone);
+      this.setValue('ozone_time', json.result.ozone_time);
     }
   }
 
