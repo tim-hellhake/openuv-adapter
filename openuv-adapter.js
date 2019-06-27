@@ -52,6 +52,13 @@ class OpenUVDevice extends Device {
       readOnly: true
     });
 
+    this.addProperty('uv_max', {
+      type: 'number',
+      title: 'Max UV',
+      description: 'The maximum UV level of the current day',
+      readOnly: true
+    });
+
     if (!this.apiKey) {
       console.warn('No apiKey set');
     }
@@ -95,6 +102,7 @@ class OpenUVDevice extends Device {
       this.setValue('uv_time', json.result.uv_time);
       this.setValue('ozone', json.result.ozone);
       this.setValue('ozone_time', json.result.ozone_time);
+      this.setValue('uv_max', json.result.uv_max);
     }
   }
 
