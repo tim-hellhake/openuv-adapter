@@ -129,13 +129,19 @@ class OpenUVDevice extends Device {
       const json = await result.json();
 
       this.setValue('uv', json.result.uv);
-      this.setValue('uv_time', json.result.uv_time);
+      this.setValue('uv_time', this.getTime(json.result.uv_time));
       this.setValue('ozone', json.result.ozone);
-      this.setValue('ozone_time', json.result.ozone_time);
+      this.setValue('ozone_time', this.getTime(json.result.ozone_time));
       this.setValue('uv_max', json.result.uv_max);
       this.setValue('uv_text', getUVLevelText(json.result.uv));
       this.setValue('uv_max_text', getUVLevelText(json.result.uv_max));
     }
+  }
+
+  getTime(dateTime) {
+    const parts = dateTime.split('T');
+
+    return parts[parts.length - 1];
   }
 
   setValue(id, value) {
