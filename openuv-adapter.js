@@ -56,6 +56,7 @@ class OpenUVDevice extends Device {
 
     this.addProperty('ozone', {
       type: 'number',
+      unit: 'DU',
       title: 'Ozone',
       description: 'The ozone level',
       readOnly: true
