@@ -1,7 +1,7 @@
 {
   "name": "openuv-adapter",
   "display_name": "OpenUV",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Get the current uv index from www.openuv.io",
   "main": "index.js",
   "scripts": {
