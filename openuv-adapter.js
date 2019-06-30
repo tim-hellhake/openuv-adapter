@@ -145,9 +145,15 @@ class OpenUVDevice extends Device {
   }
 
   getTime(dateTime) {
-    const parts = dateTime.split('T');
+    const date = new Date(dateTime);
+    const hours = this.formatTime(date.getHours());
+    const minutes = this.formatTime(date.getMinutes());
 
-    return parts[parts.length - 1];
+    return `${hours}:${minutes}`;
+  }
+
+  formatTime(time) {
+    return time < 10 ? `0${time}` : `${time}`;
   }
 
   setValue(id, value) {
