@@ -83,14 +83,16 @@ class OpenUVDevice extends Device {
       type: 'string',
       title: 'UV level',
       description: 'The current UV level',
-      readOnly: true
+      readOnly: true,
+      enum: Object.values(UV_LEVELS)
     });
 
     this.addProperty('uv_level_max', {
       type: 'string',
       title: 'Max UV level',
       description: 'The maximum UV level of the current day',
-      readOnly: true
+      readOnly: true,
+      enum: Object.values(UV_LEVELS)
     });
 
     if (!this.apiKey) {
