@@ -44,7 +44,8 @@ class OpenUVDevice extends Device {
       type: 'number',
       title: 'UV',
       description: 'The current UV index',
-      readOnly: true
+      readOnly: true,
+      multipleOf: 0.001
     });
 
     this.addProperty('uv_time', {
@@ -59,7 +60,8 @@ class OpenUVDevice extends Device {
       unit: 'DU',
       title: 'Ozone',
       description: 'The ozone level',
-      readOnly: true
+      readOnly: true,
+      multipleOf: 0.1
     });
 
     this.addProperty('ozone_time', {
@@ -73,7 +75,8 @@ class OpenUVDevice extends Device {
       type: 'number',
       title: 'Max UV',
       description: 'The maximum UV level of the current day',
-      readOnly: true
+      readOnly: true,
+      multipleOf: 0.001
     });
 
     this.addProperty('uv_text', {
