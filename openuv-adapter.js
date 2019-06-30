@@ -14,7 +14,7 @@ const {
   Property
 } = require('gateway-addon');
 
-const UV_LEVEL_TEXTS = {
+const UV_LEVELS = {
   0: 'Low',
   3: 'Moderate',
   6: 'High',
@@ -22,12 +22,12 @@ const UV_LEVEL_TEXTS = {
   11: 'Extreme'
 };
 
-function getUVLevelText(level) {
-  const keys = Object.keys(UV_LEVEL_TEXTS);
+function getUVLevel(level) {
+  const keys = Object.keys(UV_LEVELS);
   const matchingKeys = keys.filter((key) => key <= level);
   const key = Math.max.apply(null, matchingKeys);
 
-  return UV_LEVEL_TEXTS[key];
+  return UV_LEVELS[key];
 }
 
 class OpenUVDevice extends Device {
@@ -79,17 +79,17 @@ class OpenUVDevice extends Device {
       multipleOf: 0.001
     });
 
-    this.addProperty('uv_text', {
+    this.addProperty('uv_level', {
       type: 'string',
-      title: 'UV text',
-      description: 'The current UV index as text',
+      title: 'UV level',
+      description: 'The current UV level',
       readOnly: true
     });
 
-    this.addProperty('uv_max_text', {
+    this.addProperty('uv_level_max', {
       type: 'string',
-      title: 'Max UV text',
-      description: 'The maximum UV level of the current day as text',
+      title: 'Max UV level',
+      description: 'The maximum UV level of the current day',
       readOnly: true
     });
 
@@ -137,8 +137,8 @@ class OpenUVDevice extends Device {
       this.setValue('ozone', json.result.ozone);
       this.setValue('ozone_time', this.getTime(json.result.ozone_time));
       this.setValue('uv_max', json.result.uv_max);
-      this.setValue('uv_text', getUVLevelText(json.result.uv));
-      this.setValue('uv_max_text', getUVLevelText(json.result.uv_max));
+      this.setValue('uv_level', getUVLevel(json.result.uv));
+      this.setValue('uv_level_max', getUVLevel(json.result.uv_max));
     }
   }
 
