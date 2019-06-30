@@ -48,10 +48,10 @@ class OpenUVDevice extends Device {
       multipleOf: 0.001
     });
 
-    this.addProperty('uv_time', {
+    this.addProperty('uv_refresh_time', {
       type: 'string',
-      title: 'UV time',
-      description: 'The time of the current UV index',
+      title: 'UV refresh time',
+      description: 'The last time the uv index changed',
       readOnly: true
     });
 
@@ -64,10 +64,10 @@ class OpenUVDevice extends Device {
       multipleOf: 0.1
     });
 
-    this.addProperty('ozone_time', {
+    this.addProperty('ozone_refresh_time', {
       type: 'string',
-      title: 'Ozone time',
-      description: 'The time of the ozone level',
+      title: 'Ozone refresh time',
+      description: 'The last time the ozone level changed',
       readOnly: true
     });
 
@@ -135,9 +135,9 @@ class OpenUVDevice extends Device {
       const json = await result.json();
 
       this.setValue('uv', json.result.uv);
-      this.setValue('uv_time', this.getTime(json.result.uv_time));
+      this.setValue('uv_refresh_time', this.getTime(json.result.uv_time));
       this.setValue('ozone', json.result.ozone);
-      this.setValue('ozone_time', this.getTime(json.result.ozone_time));
+      this.setValue('ozone_refresh_time', this.getTime(json.result.ozone_time));
       this.setValue('uv_max', json.result.uv_max);
       this.setValue('uv_level', getUVLevel(json.result.uv));
       this.setValue('uv_level_max', getUVLevel(json.result.uv_max));
