@@ -1,6 +1,6 @@
 {
   "name": "openuv-adapter",
-  "display_name": "OpenUV",
+  "display_name": "OpenUV - Clear sky UV index",
   "version": "0.3.1",
   "description": "Get the current uv index from www.openuv.io",
   "main": "index.js",
