@@ -1,0 +1,57 @@
+{
+  "author": "Tim Hellhake",
+  "description": "Get the current uv index from www.openuv.io",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "{nodeLoader} {path}",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.10.0"
+    }
+  },
+  "homepage_url": "https://github.com/tim-hellhake/openuv-adapter#readme",
+  "id": "openuv-adapter",
+  "license": "MPL-2.0",
+  "manifest_version": 1,
+  "name": "OpenUV - Clear sky UV index",
+  "options": {
+    "default": {
+      "maxOzone": 500,
+      "maxUV": 14
+    },
+    "schema": {
+      "properties": {
+        "apiKey": {
+          "title": "The api key",
+          "type": "string"
+        },
+        "latitude": {
+          "title": "The latitude of your position",
+          "type": "number"
+        },
+        "longitude": {
+          "title": "The longitude of your position",
+          "type": "number"
+        },
+        "maxOzone": {
+          "title": "The upper bound for the ozone level indicator",
+          "type": "number"
+        },
+        "maxUV": {
+          "title": "The upper bound for the uv level indicator",
+          "type": "number"
+        }
+      },
+      "required": [
+        "apiKey",
+        "latitude",
+        "longitude",
+        "maxUV",
+        "maxOzone"
+      ],
+      "type": "object"
+    }
+  },
+  "short_name": "OpenUV - Cle",
+  "version": "0.4.0"
+}
