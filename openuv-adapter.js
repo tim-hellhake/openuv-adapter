@@ -34,18 +34,24 @@ class OpenUVDevice extends Device {
   constructor(adapter, manifest) {
     super(adapter, OpenUVDevice.name);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
+    this['@type'] = ['MultiLevelSensor'];
     this.name = manifest.display_name;
     this.description = manifest.description;
     this.apiKey = manifest.moziot.config.apiKey;
     this.latitude = manifest.moziot.config.latitude;
     this.longitude = manifest.moziot.config.longitude;
+    this.maxUV = manifest.moziot.config.maxUV;
+    this.maxOzone = manifest.moziot.config.maxOzone;
 
     this.addProperty('uv', {
+      '@type': 'LevelProperty',
       type: 'number',
       title: 'UV',
       description: 'The current UV index',
       readOnly: true,
-      multipleOf: 0.001
+      multipleOf: 0.001,
+      minimum: 0,
+      maximum: this.maxUV
     });
 
     this.addProperty('uv_refresh_time', {
@@ -56,12 +62,15 @@ class OpenUVDevice extends Device {
     });
 
     this.addProperty('ozone', {
+      '@type': 'LevelProperty',
       type: 'number',
       unit: 'DU',
       title: 'Ozone',
       description: 'The ozone level',
       readOnly: true,
-      multipleOf: 0.1
+      multipleOf: 0.1,
+      minimum: 0,
+      maximum: this.maxOzone
     });
 
     this.addProperty('ozone_refresh_time', {
@@ -72,11 +81,14 @@ class OpenUVDevice extends Device {
     });
 
     this.addProperty('uv_max', {
+      '@type': 'LevelProperty',
       type: 'number',
       title: 'Max UV',
       description: 'The maximum UV level of the current day',
       readOnly: true,
-      multipleOf: 0.001
+      multipleOf: 0.001,
+      minimum: 0,
+      maximum: this.maxUV
     });
 
     this.addProperty('uv_level', {

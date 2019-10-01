@@ -31,12 +31,18 @@
     },
     "plugin": true,
     "exec": "{nodeLoader} {path}",
+    "config": {
+      "maxUV": 14,
+      "maxOzone": 500
+    },
     "schema": {
       "type": "object",
       "required": [
         "apiKey",
         "latitude",
-        "longitude"
+        "longitude",
+        "maxUV",
+        "maxOzone"
       ],
       "properties": {
         "apiKey": {
@@ -50,6 +56,14 @@
         "longitude": {
           "type": "number",
           "title": "The longitude of your position"
+        },
+        "maxUV": {
+          "type": "number",
+          "title": "The upper bound for the uv level indicator"
+        },
+        "maxOzone": {
+          "type": "number",
+          "title": "The upper bound for the ozone level indicator"
         }
       }
     }
