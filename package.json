@@ -73,7 +73,7 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "babel-eslint": "^10.0.2"
+    "eslint": "^6.5.1",
+    "babel-eslint": "^10.0.3"
   }
 }
